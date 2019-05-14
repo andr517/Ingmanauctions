@@ -1,23 +1,23 @@
 <div class="loginbg">
 <?php
-require('partials/dbconfig.php');
 require('header.php');
-session_start();
 // Om formuläret submittas, infoga värden in i databasen.
 if (isset($_POST['username'])){
 // Tar bort backslash
 	$username = stripslashes($_REQUEST['username']);
 //Flyttar speciala karaktärer i en sträng
-	$username = mysqli_real_escape_string($con,$username);
+	$username = mysqli_real_escape_string($connection,$username);
 	$password = stripslashes($_REQUEST['password']);
-	$password = mysqli_real_escape_string($con,$password);
+	$password = mysqli_real_escape_string($connection,$password);
 //Kollar om användaren finns i databasen.
         $query = "SELECT * FROM `users` WHERE username='$username'
-and password='".md5($password)."'";
-	$result = mysqli_query($con,$query) or die(mysql_error());
-	$rows = mysqli_num_rows($result);
-        if($rows == 1){
+				and password='".md5($password)."'";
+	$result = mysqli_query($connection,$query) or die(mysql_error());
+	$rows = mysqli_fetch_assoc($result);
+	$count = mysqli_num_rows($result);
+        if($count == 1){
 	    $_SESSION['username'] = $username;
+			$_SESSION['id'] = $rows['id'];
 	    header("Location: index.php");
     }else{ ?>
       <section class="hero is-fullheight">

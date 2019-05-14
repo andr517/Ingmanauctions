@@ -1,5 +1,4 @@
 <?php
-require("partials/functions.php");
 require("header.php");
 require("partials/nav.php");
 checklogin();

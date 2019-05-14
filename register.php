@@ -7,8 +7,8 @@
 </head>
 <body class="loginbg">
 <?php
-require('partials/dbconfig.php');
 require('header.php');
+dbconfig();	
 // Om formuläret submittas, infogar värden in i databasen.
 if (isset($_REQUEST['username'])){
         // tar bort backslash.

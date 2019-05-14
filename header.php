@@ -1,3 +1,7 @@
+<?php
+require('partials/functions.php');
+//dbconfig();
+ ?>
 <!DOCTYPE html>
 <html>
 <head>
