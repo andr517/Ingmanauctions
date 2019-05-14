@@ -27,20 +27,18 @@ function saveProduct($con){
   return $insId;
 }
 
-function escapeInsert($con, $insert)
-{
+function escapeInsert($con, $insert){
     $insert = htmlspecialchars($insert);
     $insert = mysqli_real_escape_string($con, $insert);
     return $insert;
 }
 
-function dbDisconnect($connection)
-{
+function dbDisconnect($connection){
     mysqli_close($connection);
 }
 
 function getcategories($con){
-  $query = "SELECT * FROM categories";
+  $query = "SELECT * FROM category";
   $result = mysqli_query($con, $query) or die('connection');
   return $result;
 }
