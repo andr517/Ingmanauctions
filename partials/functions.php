@@ -21,7 +21,9 @@ function dbconfig(){
 function saveProduct($con){
   $userid = $_SESSION["id"];
   $productName = escapeInsert($con, $_POST["productName"]);
-  $query = "INSERT INTO products (productName,productUserId)VALUES ('$productName','$userid')";
+  $askingPrice = escapeInsert($con, $_POST["askingPrice"]);
+  $productCatId = escapeInsert($con, $_POST["getCat"]);
+  $query = "INSERT INTO products (productName,productUserId,askingPrice,productCatId)VALUES ('$productName','$userid','$askingPrice','$productCatId')";
   $result = mysqli_query($con, $query) or die('connection');
   $insId = mysqli_insert_id($con);
   return $insId;
@@ -39,6 +41,12 @@ function dbDisconnect($connection){
 
 function getcategories($con){
   $query = "SELECT * FROM category";
+  $result = mysqli_query($con, $query) or die('connection');
+  return $result;
+}
+
+function getproducts($con){
+  $query = "SELECT * FROM products";
   $result = mysqli_query($con, $query) or die('connection');
   return $result;
 }

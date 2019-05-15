@@ -18,7 +18,9 @@ if (isset($_POST['username'])){
         if($count == 1){
 	    $_SESSION['username'] = $username;
 			$_SESSION['id'] = $rows['id'];
-	    header("Location: index.php");
+			$_SESSION['trn_date'] = $rows['trn_date'];
+
+	   header("Location: index.php");
     }else{ ?>
       <section class="hero is-fullheight">
         <div class="hero-body">
