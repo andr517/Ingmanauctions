@@ -23,7 +23,9 @@ function saveProduct($con){
   $productName = escapeInsert($con, $_POST["productName"]);
   $askingPrice = escapeInsert($con, $_POST["askingPrice"]);
   $productCatId = escapeInsert($con, $_POST["getCat"]);
-  $query = "INSERT INTO products (productName,productUserId,askingPrice,productCatId)VALUES ('$productName','$userid','$askingPrice','$productCatId')";
+  $pictureUrl = escapeInsert($con, $_POST["pictureUrl"]);
+  $productDescription = escapeInsert($con, $_POST["productDescription"]);
+  $query = "INSERT INTO products (productName,productUserId,askingPrice,productCatId,productDescription,pictureUrl)VALUES ('$productName','$userid','$askingPrice','$productCatId','$productDescription','$pictureUrl')";
   $result = mysqli_query($con, $query) or die('connection');
   $insId = mysqli_insert_id($con);
   return $insId;
@@ -46,9 +48,25 @@ function getcategories($con){
 }
 
 function getproducts($con){
-  $query = "SELECT * FROM products";
+  $query = "SELECT * FROM products INNER JOIN category ON category.categoryId = products.productCatId";
   $result = mysqli_query($con, $query) or die('connection');
   return $result;
+}
+
+function getproductdata($conn,$productId){
+    $query = "SELECT * FROM products WHERE productId=".$productId;
+
+    $result = mysqli_query($conn,$query) or die("Query failed: $query");
+
+    $row = mysqli_fetch_assoc($result);
+
+    return $row;
+}
+
+$_SESSION['id'] = $id;
+
+function saveBid($con,$bidid,$bid){
+  $query = "INSERT INTO bid(bidProductPId,bidProductUId,bidAmount) VALUES('$bidid','$id','$bidAmount')";
 }
 
 ?>

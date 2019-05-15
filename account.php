@@ -39,6 +39,16 @@ checklogin();
               </p>
             </div>
 
+            <label id="first"> Product description:</label><br />
+            <div class="field">
+              <p class="control has-icons-left">
+                <input class="input" type="text" name="productDescription"><br />
+                <span class="icon is-small is-left">
+                  <i class="fas fa-pen"></i>
+                </span>
+              </p>
+            </div>
+
             <label id="first"> Category:</label><br />
             <div class="field">
               <div class="control">
@@ -52,6 +62,15 @@ checklogin();
                   </select>
                 </div>
               </div>
+            </div>
+            <label id="first"> Picture:</label><br />
+            <div class="field">
+              <p class="control has-icons-left">
+                <input class="input" placeholder="URL" type="text" name="pictureUrl"><br />
+                <span class="icon is-small is-left">
+                  <i class="far fa-image"></i>
+                </span>
+              </p>
             </div>
             <label id="first"> Asking price:</label><br />
             <div class="field">
