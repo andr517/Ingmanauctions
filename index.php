@@ -8,28 +8,15 @@ $getproducts = getproducts($connection);
 <body>
   <section class="section">
     <div class="container">
-      <div class="box">
-        <h2 class="title is-4">Listing categories</h2>
-        <div class="control">
-          <label class="radio">
-            <input type="radio" name="answer">
-            All
-          </label>
-          <label class="radio">
-            <input type="radio" name="answer">
-            No
-          </label>
-        </div>
-      </div>
-      <div class="columns">
+      <div class="columns is-multiline">
       <?php
       while ($row = mysqli_fetch_array($getproducts)){ ?>
 
-        <div class="column">
+        <div id="productitem" class="column is-4">
         <div class="card">
-          <a href="product.php?prodid=<?php echo $row['productId']; ?>">
+          <a class="productlink" href="product.php?prodid=<?php echo $row['productId']; ?>">
           <div class="card-image">
-            <figure class="image is-2by1">
+            <figure class="image is-3by2">
               <img src="<?php echo $row['pictureUrl']; ?>" alt="Placeholder image">
             </figure>
           </div>

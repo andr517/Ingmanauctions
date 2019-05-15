@@ -24,6 +24,7 @@ checklogin();
             $saveProduct = saveProduct($connection);
           }
             $getcategories = getcategories($connection);
+            $getproducts = getproducts($connection);
           ?>
 
           <h2 class="title is-5">Submit new auction</h2>
@@ -42,9 +43,10 @@ checklogin();
             <label id="first"> Product description:</label><br />
             <div class="field">
               <p class="control has-icons-left">
-                <input class="input" type="text" name="productDescription"><br />
+                <!-- <input class="input" type="text" name="productDescription"><br /> -->
+                <textarea class="textarea" placeholder="e.g. Hello world" name="productDescription"></textarea>
                 <span class="icon is-small is-left">
-                  <i class="fas fa-pen"></i>
+                  <!-- <i class="fas fa-pen"></i> -->
                 </span>
               </p>
             </div>
@@ -88,11 +90,24 @@ checklogin();
               </p>
             </div>
           </form>
-
-
         </div>
+        <div class="box">
+          <h2 class="title is-4">Active listings</h2>
+        </div>
+
+          <div class="box">
+            <?php while ($row = mysqli_fetch_array($getproducts)){ ?>
+               <p class="panel-heading">
+
+                 <?php echo $row['productName']; ?>
+
+               </p>
+          <?php } ?>
+          </div>
+
+
       </div>
-      <div class="is-divider" data-content="OR"></div>
+
     </section>
 
   </body>

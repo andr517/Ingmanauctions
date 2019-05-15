@@ -16,3 +16,13 @@
 .image {
   object-fit:cover;
 }
+
+.productlink {
+  color: inherit;
+}
+
+#center {
+  display: block;
+    margin-left: auto;
+    margin-right: auto }
+}

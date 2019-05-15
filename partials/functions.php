@@ -63,7 +63,11 @@ function getproductdata($conn,$productId){
     return $row;
 }
 
-$_SESSION['id'] = $id;
+function deleteCustomer($conn,$customerId){
+    $query = "DELETE FROM product WHERE productId=". $customerId;
+
+    $result = mysqli_query($conn,$query) or die("Query failed: $query");
+}
 
 function saveBid($con,$bidid,$bid){
   $query = "INSERT INTO bid(bidProductPId,bidProductUId,bidAmount) VALUES('$bidid','$id','$bidAmount')";

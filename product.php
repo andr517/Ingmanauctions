@@ -18,7 +18,7 @@ if(isset($_POST['isbid']) && $_POST['isbid'] > 0 ){
 	$bidData = saveBid($connection,$_POST['isbid']);
 }
  ?>
- <div class="section">
+ <div id="center" class="section">
 <div class="container">
 
   <div class="tile is-ancestor">
