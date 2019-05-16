@@ -14,8 +14,8 @@
       <a class="navbar-item" href="index.php">
         Listings
       </a>
-      <a class="navbar-item">
-        Contact
+      <a class="navbar-item" href="staffPage.php">
+        Staff
       </a>
       <a class="navbar-item">
         About

@@ -94,13 +94,12 @@ checklogin();
         <div class="box">
           <h2 class="title is-4">Active listings</h2>
         </div>
-
           <div class="box">
             <?php while ($row = mysqli_fetch_array($getproducts)){ ?>
                <p class="panel-heading">
-
                  <?php echo $row['productName']; ?>
-
+                 <a href="product_delete.php?deleteid=<?php echo $row['productId'];?>"><button class="button is-danger">Delete</button></a>
+                 <a href="product_update.php?editid=<?php echo $row['productId'];?>"><button class="button is-link">Edit</button></a>
                </p>
           <?php } ?>
           </div>

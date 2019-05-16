@@ -54,7 +54,9 @@ function getproducts($con){
 }
 
 function getproductdata($conn,$productId){
-    $query = "SELECT * FROM products WHERE productId=".$productId;
+    $query = "SELECT * FROM products INNER JOIN users ON users.id = products.productUserId
+    INNER JOIN category ON category.categoryId = products.productCatId
+    WHERE productId=".$productId;
 
     $result = mysqli_query($conn,$query) or die("Query failed: $query");
 
@@ -64,13 +66,37 @@ function getproductdata($conn,$productId){
 }
 
 function deleteCustomer($conn,$customerId){
-    $query = "DELETE FROM product WHERE productId=". $customerId;
+    $query = "DELETE FROM products WHERE productId=". $customerId;
 
     $result = mysqli_query($conn,$query) or die("Query failed: $query");
 }
 
-function saveBid($con,$bidid,$bid){
-  $query = "INSERT INTO bid(bidProductPId,bidProductUId,bidAmount) VALUES('$bidid','$id','$bidAmount')";
+function saveBid($conn,$bidAmount,$prodId){
+  $userid = $_SESSION["id"];
+  $bidAmount = escapeInsert($conn,$_POST['bidAmount']);
+  $query = "INSERT INTO bid (bidAmount,bidProductPId,bidProductUId )VALUES ('$bidAmount','$prodId','$userid')";
+  $result = mysqli_query($conn,$query) or die("Query failed: $query");
+}
+
+function getBid($con){
+  $query = "SELECT * FROM bid INNER JOIN users ON users.id = bid.bidProductUId";
+  $result = mysqli_query($con, $query) or die('connection');
+  return $result;
+}
+
+function updateCustomer($conn){
+    $img = escapeInsert($conn,$_POST['txtimg']);
+    $title = escapeInsert($conn,$_POST['txttitle']);
+    $price = escapeInsert($conn,$_POST['price']);
+    $cat = escapeInsert($conn,$_POST['getCat']);
+    $des = escapeInsert($conn,$_POST['txtdes']);
+    $editid = $_POST['updateid'];
+
+    $query = "UPDATE products
+			SET pictureUrl='$img', productName='$title', askingPrice='$price', productCatId='$cat', productDescription='$des'
+			WHERE productId=". $editid;
+
+    $result = mysqli_query($conn,$query) or die("Query failed: $query");
 }
 
 ?>

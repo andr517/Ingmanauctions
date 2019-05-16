@@ -8,21 +8,21 @@
 <body class="loginbg">
 <?php
 require('header.php');
-dbconfig();	
+dbconfig();
 // Om formuläret submittas, infogar värden in i databasen.
 if (isset($_REQUEST['username'])){
         // tar bort backslash.
 	$username = stripslashes($_REQUEST['username']);
         //flyttar speciella karaktärer in i en sträng.
-	$username = mysqli_real_escape_string($con,$username);
+	$username = mysqli_real_escape_string($connection,$username);
 	$email = stripslashes($_REQUEST['email']);
-	$email = mysqli_real_escape_string($con,$email);
+	$email = mysqli_real_escape_string($connection,$email);
 	$password = stripslashes($_REQUEST['password']);
-	$password = mysqli_real_escape_string($con,$password);
+	$password = mysqli_real_escape_string($connection,$password);
 	$trn_date = date("Y-m-d H:i:s");
   $query = "INSERT into `users` (username, password, email, trn_date)
 VALUES ('$username', '".md5($password)."', '$email', '$trn_date')";
-        $result = mysqli_query($con,$query);
+        $result = mysqli_query($connection,$query);
 				if($result){ ?>
           <section class="hero is-fullheight">
             <div class="hero-body">
