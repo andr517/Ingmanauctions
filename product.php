@@ -13,14 +13,14 @@ checklogin();
 
   <body>
     <?php
+$getbid = getBid($connection);
 if(isset($_GET['prodid']) && $_GET['prodid'] > 0 ){
 	$productData = getproductdata($connection,$_GET['prodid']);
 }
-if(isset($_POST['productbidid']) && $_POST['productbidid'] > 0 ){
-	$bidData = saveBid($connection,$_POST['bidAmount'],$_POST['productbidid']);
-  header("Location: product.php?prodid=".$_POST['productbidid']);
-}
-$getbid = getBid($connection);
+    if(isset($_POST['productbidid']) && $_POST['productbidid'] > 0 ){
+    $bidData = saveBid($connection,$_POST['bidAmount'],$_POST['productbidid']);
+    header("Location: product.php?prodid=".$_POST['productbidid']);
+    }
  ?>
     <div id="center" class="section">
       <div class="container">
@@ -49,7 +49,7 @@ $getbid = getBid($connection);
                   </p>
                 </form>
                   <p class="text">Posted by user:
-                    <?php echo $productData['username']; ?>
+                    <?php echo ucfirst($productData['username']); ?>
                   </p>
                   <p>Starting bid: $
                     <?php echo $productData['askingPrice']; ?>
@@ -59,8 +59,12 @@ $getbid = getBid($connection);
                   </p>
                   <p>
                     <?php while($row = mysqli_fetch_array($getbid)){
-                      if ($row['bidProductPId'] == $productData['productId']) {
-                        echo $row['bidAmount'];
+                      if ($row['bidProductPId'] == $productData['productId']) { ?>
+                        <p>Bidder: <?php echo ucfirst($row['username'])?>
+                          <span class="has-text-success">$<?php echo $row['bidAmount']; ?></span>
+                        </p>
+
+                    <?php
                       }
                       }
                      ?>

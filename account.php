@@ -22,6 +22,12 @@ checklogin();
           <?php
           if(isset($_POST['save'])) {
             $saveProduct = saveProduct($connection);
+            ?>
+            <div class="notification is-success">
+              <button class="delete"></button>
+              <p>Auction listing successfully created!</p>
+            </div>
+            <?php
           }
             $getcategories = getcategories($connection);
             $getproducts = getproducts($connection);
@@ -91,17 +97,20 @@ checklogin();
             </div>
           </form>
         </div>
+
+
+
         <div class="box">
           <h2 class="title is-4">Active listings</h2>
-        </div>
-          <div class="box">
-            <?php while ($row = mysqli_fetch_array($getproducts)){ ?>
+            <?php while ($row = mysqli_fetch_array($getproducts)){
+               if ($_SESSION['id'] == $row['productUserId']) { ?>
                <p class="panel-heading">
                  <?php echo $row['productName']; ?>
                  <a href="product_delete.php?deleteid=<?php echo $row['productId'];?>"><button class="button is-danger">Delete</button></a>
                  <a href="product_update.php?editid=<?php echo $row['productId'];?>"><button class="button is-link">Edit</button></a>
                </p>
-          <?php } ?>
+               <?php }
+             } ?>
           </div>
 
 

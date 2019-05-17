@@ -26,13 +26,13 @@ $getproducts = getproducts($connection);
               </div>
               <div class="media-content">
                 <p class="title is-4"><?php echo $row['productName']; ?></p>
-                <p class="subtitle is-6">Asking price $<?php echo $row['askingPrice']; ?></p>
+                <p class="subtitle is-6">Starting bid <span class="has-text-success"> $<?php echo $row['askingPrice']; ?></span></p>
               </div>
             </div>
 
             <div class="content">
-              <p class="text category"><?php echo $row['categoryName']; ?></p>
-              <time>Posted: <?php echo $row['created_at']; ?></time>
+              <p class="text"><span class="category"><?php echo $row['categoryName']; ?></span></p>
+              <p class="text is-size-7">Posted: <?php echo $row['created_at']; ?></p>
             </div>
           </div>
               </a>

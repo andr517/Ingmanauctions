@@ -72,10 +72,13 @@ function deleteCustomer($conn,$customerId){
 }
 
 function saveBid($conn,$bidAmount,$prodId){
+  $productData = getproductdata($conn,$prodId);
   $userid = $_SESSION["id"];
   $bidAmount = escapeInsert($conn,$_POST['bidAmount']);
-  $query = "INSERT INTO bid (bidAmount,bidProductPId,bidProductUId )VALUES ('$bidAmount','$prodId','$userid')";
-  $result = mysqli_query($conn,$query) or die("Query failed: $query");
+  if ($bidAmount > $productData['askingPrice']) {
+    $query = "INSERT INTO bid (bidAmount,bidProductPId,bidProductUId )VALUES ('$bidAmount','$prodId','$userid')";
+    $result = mysqli_query($conn,$query) or die("Query failed: $query");
+  }
 }
 
 function getBid($con){
