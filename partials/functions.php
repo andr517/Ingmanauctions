@@ -82,7 +82,8 @@ function saveBid($conn,$bidAmount,$prodId){
 }
 
 function getBid($con){
-  $query = "SELECT * FROM bid INNER JOIN users ON users.id = bid.bidProductUId";
+  $query = "SELECT * FROM bid INNER JOIN users ON users.id = bid.bidProductUId
+  INNER JOIN products ON products.productId = bid.bidProductPId";
   $result = mysqli_query($con, $query) or die('connection');
   return $result;
 }
