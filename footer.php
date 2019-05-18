@@ -7,5 +7,6 @@
   </div>
 </footer>
 </body>
+
 </html>
 <?php dbDisconnect($connection) ?>
