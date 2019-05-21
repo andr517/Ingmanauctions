@@ -28,8 +28,8 @@ $getproducts = getproducts($connection);
                     <p class="title is-4">
                       <?php echo $row['productName']; ?>
                     </p>
-                    <p class="subtitle is-6">Starting bid <span class="has-text-success"> $
-                        <?php echo $row['askingPrice']; ?></span></p>
+                    <p class="subtitle is-6">Starting bid <span class="has-text-success">
+                      $<?php echo $row['askingPrice']; ?></span></p>
                   </div>
                 </div>
 

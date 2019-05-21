@@ -103,4 +103,11 @@ function updateCustomer($conn){
     $result = mysqli_query($conn,$query) or die("Query failed: $query");
 }
 
+// API functions
+function getproductsApi($conn){
+  $query = "SELECT * FROM products INNER JOIN category ON category.categoryId = products.productCatId";
+  $result = mysqli_query($con, $query) or die('connection');
+  $row = mysqli_fetch_all($result);
+  return $row;
+}
 ?>
