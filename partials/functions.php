@@ -106,8 +106,53 @@ function updateCustomer($conn){
 // API functions
 function getproductsApi($conn){
   $query = "SELECT * FROM products INNER JOIN category ON category.categoryId = products.productCatId";
-  $result = mysqli_query($con, $query) or die('connection');
+  $result = mysqli_query($conn, $query) or die('connection');
   $row = mysqli_fetch_all($result);
   return $row;
+}
+
+function getproductdataApi($conn,$productId){
+    $query = "SELECT * FROM products INNER JOIN users ON users.id = products.productUserId
+    INNER JOIN category ON category.categoryId = products.productCatId
+    WHERE productId=".$productId;
+
+    $result = mysqli_query($conn,$query) or die("Query failed: $query");
+
+    $row = mysqli_fetch_assoc($result);
+
+    return $row;
+}
+
+function saveProductApi($con){
+  $productName = escapeInsert($con, $_POST["productName"]);
+  $askingPrice = escapeInsert($con, $_POST["askingPrice"]);
+  $productCatId = escapeInsert($con, $_POST["getCat"]);
+  $pictureUrl = escapeInsert($con, $_POST["pictureUrl"]);
+  $productDescription = escapeInsert($con, $_POST["productDescription"]);
+  $query = "INSERT INTO products (productName,productUserId,askingPrice,productCatId,productDescription,pictureUrl)VALUES ('$productName','$askingPrice','$productCatId','$productDescription','$pictureUrl')";
+  $result = mysqli_query($con, $query) or die('connection');
+  $insId = mysqli_insert_id($con);
+  return $insId;
+}
+
+function deleteProductApi($conn,$customerId){
+    $query = "DELETE FROM products WHERE productId=". $customerId;
+
+    $result = mysqli_query($conn,$query) or die("Query failed: $query");
+}
+
+function updateProductApi($conn){
+    $img = escapeInsert($conn,$_POST['txtimg']);
+    $title = escapeInsert($conn,$_POST['txttitle']);
+    $price = escapeInsert($conn,$_POST['price']);
+    $cat = escapeInsert($conn,$_POST['getCat']);
+    $des = escapeInsert($conn,$_POST['txtdes']);
+    $id = $_GET['prodid'];
+
+    $query = "UPDATE products
+			SET pictureUrl='$img', productName='$title', askingPrice='$price', productCatId='$cat', productDescription='$des'
+			WHERE productId=". $id;
+
+    $result = mysqli_query($conn,$query) or die("Query failed: $query");
 }
 ?>
